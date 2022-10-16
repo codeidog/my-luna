@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      | LCBR | RCBR |      |-------.    ,-------| Mins |  Eql | BSLS | LBRC | RBRC |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * | Shift|      |      |      |      |      |-------|    |-------|      | SCln |  Cln |      |      |      |
+ * | Shift|      |      |      |      |      |-------|    |-------|      | SCln |  Cln |      |      | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            |      |      |      |      | /       /       \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SYMBOLS] = LAYOUT(
   XXXXXXX,  KC_F1,    KC_F2,     KC_F3,     KC_F4,    KC_F5,                            KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,
-  XXXXXXX,  XXXXXXX,  KC_LBRC,   KC_RBRC,   XXXXXXX,  XXXXXXX,                          KC_PIPE,  KC_LPRN,  KC_RPRN,  XXXXXXX,  XXXXXXX,  KC_F12,
-  XXXXXXX,  XXXXXXX,  KC_LCBR,   KC_RCBR,   XXXXXXX,  XXXXXXX,                          KC_MINS,  KC_EQL,   KC_BSLS,  KC_LBRC,  KC_RBRC,  XXXXXXX,
-  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_SCLN,  KC_COLN,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+  XXXXXXX,  XXXXXXX,  XXXXXXX,   KC_LBRC,   KC_RBRC,  XXXXXXX,                          KC_PIPE,  KC_LPRN,  KC_RPRN,  XXXXXXX,  XXXXXXX,  KC_F12,
+  XXXXXXX,  XXXXXXX,  XXXXXXX,   KC_LCBR,   KC_RCBR,  XXXXXXX,                          KC_MINS,  KC_EQL,   KC_BSLS,  KC_LBRC,  KC_RBRC,  XXXXXXX,
+  KC_LSFT,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_SCLN,  KC_COLN,  XXXXXXX,  XXXXXXX,  KC_RSFT,
                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ADJUST,                      KC_ADJUST, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
@@ -160,9 +160,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* 32 * 32 logo */
 static void render_logo(void) {
-    static const char PROGMEM hell_logo[] = {0x00, 0x80, 0xc0, 0xc0, 0x60, 0x60, 0x30, 0x30, 0x18, 0x1c, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0x78, 0x1e, 0x06, 0x00, 0x0c, 0x1c, 0x18, 0x30, 0x30, 0x60, 0x60, 0xc0, 0xc0, 0x80, 0x00, 0x01, 0x03, 0x07, 0x06, 0x0c, 0x0c, 0x18, 0x18, 0x30, 0x70, 0x60, 0x00, 0xc0, 0xf0, 0x3c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x60, 0x70, 0x30, 0x18, 0x18, 0x0c, 0x0c, 0x06, 0x07, 0x03, 0x01, 0x00, 0xf8, 0xf8, 0x80, 0x80, 0x80, 0xf8, 0xf8, 0x00, 0x80, 0xc0, 0xc0, 0x40, 0xc0, 0xc0, 0x80, 0x00, 0xf8, 0xf8, 0x00, 0xf8, 0xf8, 0x00, 0x08, 0x38, 0x08, 0x00, 0x38, 0x08, 0x30, 0x08, 0x38, 0x00, 0x1f, 0x1f, 0x01, 0x01, 0x01, 0x1f, 0x1f, 0x00, 0x0f, 0x1f, 0x1a, 0x12, 0x1a, 0x1b, 0x0b, 0x00, 0x1f, 0x1f, 0x00, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
-    oled_write_raw_P(hell_logo, sizeof(hell_logo));
+    static const char PROGMEM bread_logo[] = {// 'bread', 32x32px
+                                              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0xf8, 0x98, 0x00, 0x00, 0x60, 0xf8, 0x90, 0x00, 0x00, 0x60, 0xf8, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0xc0, 0xd1, 0xdf, 0x46, 0x40, 0x40, 0xd1, 0xdf, 0xc6, 0x40, 0x40, 0xd1, 0xdf, 0xc6, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0x1c, 0x0c, 0x06, 0x73, 0x7f, 0x07, 0x01, 0x00, 0x00, 0x00, 0x7c, 0x0e, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x38, 0x0c, 0x06, 0x03, 0x03, 0x03, 0x06, 0x0e, 0x1c, 0xf0, 0xc0, 0x01, 0x07, 0x0c, 0x08, 0x18, 0x18, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x18, 0x18, 0x08, 0x0c, 0x07, 0x03};
+    oled_write_raw_P(bread_logo, sizeof(bread_logo));
 }
 
 /* 32 * 14 os logos */
@@ -309,35 +309,7 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
 
 /* KEYBOARD PET END */
 
-static void print_logo_narrow(void) {
-    render_logo();
-
-    /* wpm counter */
-    uint8_t n = get_current_wpm();
-    char    wpm_str[4];
-    oled_set_cursor(0, 14);
-    wpm_str[3] = '\0';
-    wpm_str[2] = '0' + n % 10;
-    wpm_str[1] = '0' + (n /= 10) % 10;
-    wpm_str[0] = '0' + n / 10;
-    oled_write(wpm_str, false);
-
-    oled_set_cursor(0, 15);
-    oled_write(" wpm", false);
-}
-
-static void print_status_narrow(void) {
-    /* Print current mode */
-    oled_set_cursor(0, 0);
-    oled_write_raw_P(docker_logo, sizeof(docker_logo));
-    /*if (keymap_config.swap_lctl_lgui) {
-        oled_write_raw_P(mac_logo, sizeof(mac_logo));
-    } else {
-        oled_write_raw_P(windows_logo, sizeof(windows_logo));
-    }*/
-
-    oled_set_cursor(0, 3);
-
+static void print_top_layer(void) {
     switch (get_highest_layer(default_layer_state)) {
         case _QWERTY:
             oled_write("QWRTY", false);
@@ -348,26 +320,21 @@ static void print_status_narrow(void) {
         default:
             oled_write("UNDEF", false);
     }
+}
 
-    oled_set_cursor(0, 5);
-
-    /* Print current layer */
-    oled_write("LAYER", false);
-
-    oled_set_cursor(0, 6);
-
+static void print_highest_layer(void) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write("Base ", false);
             break;
         case _FUNCTION:
-            oled_write("FUNCTION", false);
+            oled_write("FN   ", false);
             break;
         case _RAISE:
             oled_write("Raise", false);
             break;
         case _SYMBOLS:
-            oled_write("SYMBOLS", false);
+            oled_write("SYMBL", false);
             break;
         case _ADJUST:
             oled_write("Adj  ", false);
@@ -375,8 +342,46 @@ static void print_status_narrow(void) {
         default:
             oled_write("Undef", false);
     }
+}
 
-    /* caps lock */
+static void print_logo_narrow(void) {
+    render_logo();
+
+    /* wpm counter */
+    // uint8_t n = get_current_wpm();
+    //  char    wpm_str[4];
+    oled_set_cursor(0, 5);
+
+    // wpm_str[3] = '\0';
+    // wpm_str[2] = '0' + n % 10;
+    // wpm_str[1] = '0' + (n /= 10) % 10;
+    // wpm_str[0] = '0' + n / 10;
+    print_top_layer();
+    oled_set_cursor(0, 7);
+    print_highest_layer();
+    oled_set_cursor(0, 9);
+    oled_write("CPSLK", led_usb_state.caps_lock);
+
+    // oled_set_cursor(0, 15);
+    // oled_write(" wpm", false);
+}
+
+static void print_status_narrow(void) {
+    /* Print Logo */
+    oled_set_cursor(0, 0);
+    oled_write_raw_P(docker_logo, sizeof(docker_logo));
+
+    /* Print top layer */
+    oled_set_cursor(0, 3);
+    print_top_layer();
+    oled_set_cursor(0, 5);
+
+    /* Print current layer */
+    oled_write("LAYER", false);
+    oled_set_cursor(0, 6);
+    print_highest_layer();
+
+    /* Print caps lock status */
     oled_set_cursor(0, 8);
     oled_write("CPSLK", led_usb_state.caps_lock);
 
@@ -419,7 +424,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_FUNCTION:
             if (record->event.pressed) {
                 layer_on(_FUNCTION);
-                // set_single_persistent_default_layer(_FUNCTION);
             } else {
                 layer_off(_FUNCTION);
             }
@@ -591,28 +595,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (shift_held) {
                     register_code(held_shift);
                 }
-            }
-            return false;
-
-            /* LAYER */
-
-        case KC_LAYER:
-            if (record->event.pressed) {
-                if (shift_held) {
-                    if (record->event.pressed) {
-                        if (get_highest_layer(default_layer_state) == _QWERTY) {
-                            set_single_persistent_default_layer(_FUNCTION);
-                        } else if (get_highest_layer(default_layer_state) == _FUNCTION) {
-                            set_single_persistent_default_layer(_QWERTY);
-                        }
-                    }
-                } else {
-                    layer_on(_SYMBOLS);
-                    update_tri_layer(_SYMBOLS, _RAISE, _ADJUST);
-                }
-            } else {
-                layer_off(_SYMBOLS);
-                update_tri_layer(_SYMBOLS, _RAISE, _ADJUST);
             }
             return false;
 
