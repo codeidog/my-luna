@@ -18,7 +18,7 @@
 
 enum sofle_layers {
     _QWERTY   = 0,
-    _COLEMAK  = 1,
+    _COLEMAK_DH  = 1,
     _FUNCTION = 2,
     _SYMBOLS  = 3,
     _ADJUST   = 5,
@@ -27,7 +27,7 @@ enum sofle_layers {
 // clang-format off
 enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
-    KC_COLEMAK,
+    KC_COLEMAK_DH,
     KC_FUNCTION,
     KC_SYMBOLS,
     KC_RAISE,
@@ -71,22 +71,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------------------.                        ,-----------------------------------------.
      * | Esc  |   1  |   2  |   3  |   4  |   5  |                        |   6  |   7  |   8  |   9  |   0  |  BS  |
      * |------+------+------+------+------+------|                        |------+------+------+------+------+------|
-     * | Tab  |   Q  |   W  |   F  |   P  |   G  |                        |   J  |   L  |   U  |   Y  |   ;  |  `   |
+     * | Tab  |   Q  |   W  |   F  |   P  |   B  |                        |   J  |   L  |   U  |   Y  |   ;  |  `   |
      * |------+------+------+------+------+------|                        |------+------+------+------+------+------|
-     * | Caps |   A  |   R  |   S  |   T  |   D  |-------.    ,-----------|   H  |   N  |   E  |   I  |   O  |  '   |
+     * | Caps |   A  |   R  |   S  |   T  |   G  |-------.    ,-----------|   M  |   N  |   E  |   I  |   O  |  '   |
      * |------+------+------+------+------+------|  mute |    |    caps   |------+------+------+------+------+------|
-     * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-----------|   K  |   M  |   ,  |   .  |   /  |RShift|
+     * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-----------|   K  |   H  |   ,  |   .  |   /  |RShift|
      * `-----------------------------------------/       /     \          \-----------------------------------------'
      *            | LGUI | LAlt | LCtrl| Enter| /Layer  /       \ FUNCTION \  |  Spc | RCtrl | RAlt | RGUI |
      *            |      |      |      |      |/       /         \          \ |      |       |      |      |
      *            `----------------------------------'           '------''---------------------------------'
      */
 
-[_COLEMAK] = LAYOUT(
+[_COLEMAK_DH] = LAYOUT(
   KC_ESC,   KC_1,  KC_2,  KC_3,  KC_4,  KC_5,                                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,
-  KC_GRV,   KC_Q,  KC_W,  KC_F,  KC_P,  KC_G,                                    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_BSPC_DEL,
-  KC_TAB,   KC_A,  KC_R,  KC_S,  KC_T,  KC_D,                                    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,     KC_QUOT,
-  KC_LSFT,  KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,   KC_MUTE,              KC_CAPS,   KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+  KC_GRV,   KC_Q,  KC_W,  KC_F,  KC_P,  KC_B,                                    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_BSPC_DEL,
+  KC_TAB,   KC_A,  KC_R,  KC_S,  KC_T,  KC_G,                                    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,     KC_QUOT,
+  KC_LSFT,  KC_Z,  KC_X,  KC_C,  KC_D,  KC_V,   KC_MUTE,              KC_CAPS,   KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
                 KC_LGUI,KC_LALT,KC_LCTL,KC_ENTER,KC_SYMBOLS,      KC_FUNCTION,  KC_SPC, KC_RCTL, KC_RALT, KC_RGUI
 ),
 
@@ -151,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT(
   XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX ,    XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  QK_BOOT,  XXXXXXX,  KC_QWERTY,  KC_COLEMAK,  XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  QK_BOOT,  XXXXXXX,  KC_QWERTY,  KC_COLEMAK_DH,  XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX,  XXXXXXX,  CG_TOGG,    XXXXXXX,     XXXXXXX,  XXXXXXX,                        XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX,  XXXXXXX,    XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX,  XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                    _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
@@ -171,9 +171,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_QWERTY);
             }
             return false;
-        case KC_COLEMAK:
+        case KC_COLEMAK_DH:
             if (record->event.pressed) {
-                set_single_persistent_default_layer(_COLEMAK);
+                set_single_persistent_default_layer(_COLEMAK_DH);
             }
             return false;
         case KC_FUNCTION:
